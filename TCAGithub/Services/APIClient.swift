@@ -42,3 +42,10 @@ extension APIClient: DependencyKey {
         )
     }
 }
+
+extension DependencyValues {
+    var apiClient: APIClient {
+        get { self[APIClient.self] }
+        set { self[APIClient.self] = newValue }
+    }
+}
