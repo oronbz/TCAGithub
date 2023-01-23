@@ -72,3 +72,6 @@ fastlane/README.md
 
 # VSCode
 .vscode/
+
+# Secrets
+**/Key.swift
