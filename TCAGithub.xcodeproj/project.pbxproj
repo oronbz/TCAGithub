@@ -8,17 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		8292F005297EC0F000CF9BEB /* TCAGithubApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292F004297EC0F000CF9BEB /* TCAGithubApp.swift */; };
-		8292F007297EC0F000CF9BEB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292F006297EC0F000CF9BEB /* ContentView.swift */; };
+		8292F007297EC0F000CF9BEB /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292F006297EC0F000CF9BEB /* SearchView.swift */; };
 		8292F009297EC0F100CF9BEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8292F008297EC0F100CF9BEB /* Assets.xcassets */; };
 		8292F00C297EC0F100CF9BEB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8292F00B297EC0F100CF9BEB /* Preview Assets.xcassets */; };
+		8292F015297ED2FB00CF9BEB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292F014297ED2FB00CF9BEB /* ProfileView.swift */; };
+		8292F018297ED61500CF9BEB /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292F017297ED61500CF9BEB /* CommentsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8292F001297EC0F000CF9BEB /* TCAGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCAGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8292F004297EC0F000CF9BEB /* TCAGithubApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCAGithubApp.swift; sourceTree = "<group>"; };
-		8292F006297EC0F000CF9BEB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8292F006297EC0F000CF9BEB /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		8292F008297EC0F100CF9BEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8292F00B297EC0F100CF9BEB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8292F014297ED2FB00CF9BEB /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		8292F017297ED61500CF9BEB /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +55,10 @@
 		8292F003297EC0F000CF9BEB /* TCAGithub */ = {
 			isa = PBXGroup;
 			children = (
+				8292F016297ED60600CF9BEB /* Comments */,
+				8292F013297ED2D800CF9BEB /* Profile */,
+				8292F012297ED25500CF9BEB /* Search */,
 				8292F004297EC0F000CF9BEB /* TCAGithubApp.swift */,
-				8292F006297EC0F000CF9BEB /* ContentView.swift */,
 				8292F008297EC0F100CF9BEB /* Assets.xcassets */,
 				8292F00A297EC0F100CF9BEB /* Preview Content */,
 			);
@@ -65,6 +71,30 @@
 				8292F00B297EC0F100CF9BEB /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8292F012297ED25500CF9BEB /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				8292F006297EC0F000CF9BEB /* SearchView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		8292F013297ED2D800CF9BEB /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				8292F014297ED2FB00CF9BEB /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		8292F016297ED60600CF9BEB /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				8292F017297ED61500CF9BEB /* CommentsView.swift */,
+			);
+			path = Comments;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +167,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8292F007297EC0F000CF9BEB /* ContentView.swift in Sources */,
+				8292F007297EC0F000CF9BEB /* SearchView.swift in Sources */,
+				8292F015297ED2FB00CF9BEB /* ProfileView.swift in Sources */,
+				8292F018297ED61500CF9BEB /* CommentsView.swift in Sources */,
 				8292F005297EC0F000CF9BEB /* TCAGithubApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
