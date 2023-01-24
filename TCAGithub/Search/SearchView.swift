@@ -10,6 +10,7 @@ import ComposableArchitecture
 
 struct Search: ReducerProtocol {
     @Dependency(\.apiClient.search) var search
+    @Dependency(\.continuousClock) var clock
     
     struct State: Equatable {
         var query: String = ""
@@ -21,6 +22,8 @@ struct Search: ReducerProtocol {
         case searchResponse(TaskResult<SearchResponse>)
     }
     
+    enum CancelID {}
+    
     var body: some ReducerProtocolOf<Self> {
         Reduce { state, action in
             switch action {
@@ -28,10 +31,16 @@ struct Search: ReducerProtocol {
                 state.query = query
                 guard query != "" else {
                     state.items = []
-                    return .none
+                    return .cancel(id: CancelID.self)
                 }
                 return .task {
-                    await .searchResponse(TaskResult { try await search(query) })
+                    try await withTaskCancellation(id: CancelID.self,
+                                                   cancelInFlight: true) {
+                        try await clock.sleep(for: .seconds(0.3))
+                        return await .searchResponse(
+                            TaskResult { try await search(query) }
+                        )
+                    }
                 }
             case .searchResponse(.success(let response)):
                 state.items = .init(uniqueElements: response.items)
