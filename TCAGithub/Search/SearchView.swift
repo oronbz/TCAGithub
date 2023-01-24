@@ -55,6 +55,9 @@ struct Search: ReducerProtocol {
                 return .none
             }
         }
+        .forEach(\.items, action: /Action.profile) {
+            Profile()
+        }
     }
 }
 
