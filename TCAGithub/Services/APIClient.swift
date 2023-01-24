@@ -10,11 +10,18 @@ import Dependencies
 
 struct APIClient {
     var search: (_ query: String) async throws -> SearchResponse
+    var user: (_ url: URL) async throws -> UserResponse
 }
 
 extension APIClient: DependencyKey {
     static var liveValue: APIClient {
         @Dependency(\.urlSession) var urlSession
+        
+        var decoder: JSONDecoder {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            return decoder
+        }
         
         return Self(
             search: { query in
@@ -25,22 +32,24 @@ extension APIClient: DependencyKey {
                 var urlRequest = URLRequest(url: urlComponents.url!)
                 urlRequest.addValue("Bearer \(Key.github)", forHTTPHeaderField: "Authorization")
                 let (data, _) = try await urlSession.data(for: urlRequest)
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 return try decoder.decode(SearchResponse.self, from: data)
+            },
+            user: { url in
+                var urlRequest = URLRequest(url: url)
+                urlRequest.addValue("Bearer \(Key.github)", forHTTPHeaderField: "Authorization")
+                let (data, _) = try await urlSession.data(for: urlRequest)
+                return try decoder.decode(UserResponse.self, from: data)
             }
         )
     }
     
     static var previewValue: APIClient {
         Self(
-            search: { query in
-                SearchResponse(items: [
-                    .init(id: 123,
-                          login: "oronbz",
-                          avatarUrl: .init(string: "https://avatars.githubusercontent.com/u/1288090?v=4")!,
-                          url: .init(string: "https://api.github.com/users/oronbz")!)
-                ])
+            search: { _ in
+                SearchResponse(items: [.mock])
+            },
+            user: { _ in
+                UserResponse(id: 123, name: "Oron Ben Zvi", followers: 2)
             }
         )
     }

@@ -21,3 +21,11 @@ extension SearchResponse {
         let url: URL
     }
 }
+
+extension SearchResponse.Item {
+    static let mock = Self(id: 123,
+                           login: "oronbz",
+                           avatarUrl: .init(string: "https://avatars.githubusercontent.com/u/1288090?v=4")!,
+                           url: .init(string: "https://api.github.com/users/oronbz")!)
+
+}

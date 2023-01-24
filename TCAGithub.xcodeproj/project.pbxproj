@@ -17,6 +17,7 @@
 		8292F01D297F1A6100CF9BEB /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292F01C297F1A6100CF9BEB /* SearchResponse.swift */; };
 		8292F020297F1D9D00CF9BEB /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 8292F01F297F1D9D00CF9BEB /* ComposableArchitecture */; };
 		8292F023297F247600CF9BEB /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292F022297F247600CF9BEB /* APIClient.swift */; };
+		82A4D78D298004B000DB76D4 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A4D78C298004B000DB76D4 /* UserResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		8292F019297F16A400CF9BEB /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		8292F01C297F1A6100CF9BEB /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		8292F022297F247600CF9BEB /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		82A4D78C298004B000DB76D4 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				8292F01C297F1A6100CF9BEB /* SearchResponse.swift */,
+				82A4D78C298004B000DB76D4 /* UserResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				8292F007297EC0F000CF9BEB /* SearchView.swift in Sources */,
 				8292F023297F247600CF9BEB /* APIClient.swift in Sources */,
 				8292F01A297F16A400CF9BEB /* Key.swift in Sources */,
+				82A4D78D298004B000DB76D4 /* UserResponse.swift in Sources */,
 				8292F01D297F1A6100CF9BEB /* SearchResponse.swift in Sources */,
 				8292F015297ED2FB00CF9BEB /* ProfileView.swift in Sources */,
 				8292F018297ED61500CF9BEB /* CommentsView.swift in Sources */,

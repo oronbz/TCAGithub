@@ -14,12 +14,13 @@ struct Search: ReducerProtocol {
     
     struct State: Equatable {
         var query: String = ""
-        var items: IdentifiedArrayOf<SearchResponse.Item> = []
+        var items: IdentifiedArrayOf<Profile.State> = []
     }
     
     enum Action: Equatable {
         case queryChanged(String)
         case searchResponse(TaskResult<SearchResponse>)
+        case profile(id: Int, action: Profile.Action)
     }
     
     enum CancelID {}
@@ -43,10 +44,14 @@ struct Search: ReducerProtocol {
                     }
                 }
             case .searchResponse(.success(let response)):
-                state.items = .init(uniqueElements: response.items)
+                state.items = .init(uniqueElements: response.items
+                    .map { .init(searchItem: $0) }
+                )
                 return .none
             case .searchResponse(.failure(let error)):
                 print(error)
+                return .none
+            case .profile(_, _):
                 return .none
             }
         }
@@ -56,29 +61,29 @@ struct Search: ReducerProtocol {
 struct SearchView: View {
     let store: StoreOf<Search>
     
-    let names = (0..<30)
-        .map { "Username \($0)" }
-    
     var body: some View {
         NavigationView {
             WithViewStore(store, observe: { $0 }) { viewStore in
                 List {
-                    ForEach(viewStore.items) { item in
+                    ForEachStore(store.scope(state: \.items,
+                                             action: Search.Action.profile)) { store in
                         NavigationLink {
-                            ProfileView()
+                            ProfileView(store: store)
                         } label: {
-                            HStack {
-                                AsyncImage(url: item.avatarUrl) { image in
-                                    image
-                                        .resizable()
-                                        .scaledToFit()
-                                } placeholder: {
-                                    ProgressView()
+                            WithViewStore(store, observe: { $0 }) { viewStore in
+                                HStack {
+                                    AsyncImage(url: viewStore.searchItem.avatarUrl) { image in
+                                        image
+                                            .resizable()
+                                            .scaledToFit()
+                                    } placeholder: {
+                                        ProgressView()
+                                    }
+                                    .frame(width: 40, height: 40)
+                                    .cornerRadius(20)
+                                    Text(viewStore.searchItem.login)
+                                    Spacer()
                                 }
-                                .frame(width: 40, height: 40)
-                                .cornerRadius(20)
-                                Text(item.login)
-                                Spacer()
                             }
                         }
                     }
