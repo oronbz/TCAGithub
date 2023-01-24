@@ -11,7 +11,7 @@ import SwiftUI
 struct TCAGithubApp: App {
     var body: some Scene {
         WindowGroup {
-            SearchView()
+            SearchView(store: .init(initialState: .init(), reducer: Search()))
         }
     }
 }

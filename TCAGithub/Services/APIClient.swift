@@ -18,8 +18,11 @@ extension APIClient: DependencyKey {
         
         return Self(
             search: { query in
-                let url = URL(string: "https://api.github.com/search/users?q=\(query)")!
-                var urlRequest = URLRequest(url: url)
+                var urlComponents = URLComponents(string: "https://api.github.com/search/users")!
+                urlComponents.queryItems = [
+                    .init(name: "q", value: query)
+                ]
+                var urlRequest = URLRequest(url: urlComponents.url!)
                 urlRequest.addValue("Bearer \(Key.github)", forHTTPHeaderField: "Authorization")
                 let (data, _) = try await urlSession.data(for: urlRequest)
                 let decoder = JSONDecoder()

@@ -14,7 +14,7 @@ struct SearchResponse: Equatable, Codable {
 }
 
 extension SearchResponse {
-    struct Item: Equatable, Codable {
+    struct Item: Equatable, Codable, Identifiable {
         let id: Int
         let login: String
         let avatarUrl: URL
