@@ -11,6 +11,6 @@ import Foundation
 
 struct UserResponse: Equatable, Codable  {
     let id: Int
-    let name: String
+    let name: String?
     let followers: Int
 }

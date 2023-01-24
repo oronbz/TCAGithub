@@ -23,6 +23,7 @@ struct Profile: ReducerProtocol {
     
     enum Action: Equatable {
         case onAppear
+        case userResponse(TaskResult<UserResponse>)
         case showCommentsTapped
         case setComments(isPresented: Bool)
     }
@@ -31,6 +32,16 @@ struct Profile: ReducerProtocol {
         Reduce { state, action in
             switch action {
             case .onAppear:
+                return .task { [url = state.searchItem.url] in
+                    await .userResponse(
+                        TaskResult { try await user(url) }
+                    )
+                }
+            case .userResponse(.success(let response)):
+                state.user = response
+                return .none
+            case .userResponse(.failure(let error)):
+                print(error)
                 return .none
             case .showCommentsTapped:
                 state.isCommentsPresened = true
@@ -63,9 +74,11 @@ struct ProfileView: View {
                         .font(.largeTitle)
                 } else {
                     Text(viewStore.searchItem.login)
-                        .redacted(reason: .placeholder)
+                        .redacted(reason: viewStore.user == nil ? .placeholder : [])
                         .font(.largeTitle)
                 }
+                
+                Text("\(viewStore.user?.followers ?? 0) followers")
                 
                 Spacer()
                 
@@ -87,7 +100,9 @@ struct ProfileView: View {
             ) {
                 CommentsView()
             }
-
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
         }
     }
 }
