@@ -18,6 +18,9 @@
 		8292F020297F1D9D00CF9BEB /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 8292F01F297F1D9D00CF9BEB /* ComposableArchitecture */; };
 		8292F023297F247600CF9BEB /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292F022297F247600CF9BEB /* APIClient.swift */; };
 		82A4D78D298004B000DB76D4 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A4D78C298004B000DB76D4 /* UserResponse.swift */; };
+		82A4D78F2981B64B00DB76D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82A4D78E2981B64B00DB76D4 /* GoogleService-Info.plist */; };
+		82A4D7922981B81400DB76D4 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 82A4D7912981B81400DB76D4 /* FirebaseDatabase */; };
+		82A4D7942981C06D00DB76D4 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A4D7932981C06D00DB76D4 /* Comment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,8 @@
 		8292F01C297F1A6100CF9BEB /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		8292F022297F247600CF9BEB /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		82A4D78C298004B000DB76D4 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
+		82A4D78E2981B64B00DB76D4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		82A4D7932981C06D00DB76D4 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82A4D7922981B81400DB76D4 /* FirebaseDatabase in Frameworks */,
 				8292F020297F1D9D00CF9BEB /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +77,7 @@
 				8292F013297ED2D800CF9BEB /* Profile */,
 				8292F012297ED25500CF9BEB /* Search */,
 				8292F004297EC0F000CF9BEB /* TCAGithubApp.swift */,
+				82A4D78E2981B64B00DB76D4 /* GoogleService-Info.plist */,
 				8292F008297EC0F100CF9BEB /* Assets.xcassets */,
 				8292F00A297EC0F100CF9BEB /* Preview Content */,
 				8292F019297F16A400CF9BEB /* Key.swift */,
@@ -115,6 +122,7 @@
 			children = (
 				8292F01C297F1A6100CF9BEB /* SearchResponse.swift */,
 				82A4D78C298004B000DB76D4 /* UserResponse.swift */,
+				82A4D7932981C06D00DB76D4 /* Comment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -145,6 +153,7 @@
 			name = TCAGithub;
 			packageProductDependencies = (
 				8292F01F297F1D9D00CF9BEB /* ComposableArchitecture */,
+				82A4D7912981B81400DB76D4 /* FirebaseDatabase */,
 			);
 			productName = TCAGithub;
 			productReference = 8292F001297EC0F000CF9BEB /* TCAGithub.app */;
@@ -176,6 +185,7 @@
 			mainGroup = 8292EFF8297EC0F000CF9BEB;
 			packageReferences = (
 				8292F01E297F1D9D00CF9BEB /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				82A4D7902981B81400DB76D4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 8292F002297EC0F000CF9BEB /* Products */;
 			projectDirPath = "";
@@ -193,6 +203,7 @@
 			files = (
 				8292F00C297EC0F100CF9BEB /* Preview Assets.xcassets in Resources */,
 				8292F009297EC0F100CF9BEB /* Assets.xcassets in Resources */,
+				82A4D78F2981B64B00DB76D4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +221,7 @@
 				8292F01D297F1A6100CF9BEB /* SearchResponse.swift in Sources */,
 				8292F015297ED2FB00CF9BEB /* ProfileView.swift in Sources */,
 				8292F018297ED61500CF9BEB /* CommentsView.swift in Sources */,
+				82A4D7942981C06D00DB76D4 /* Comment.swift in Sources */,
 				8292F005297EC0F000CF9BEB /* TCAGithubApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -421,6 +433,14 @@
 				minimumVersion = 0.9.0;
 			};
 		};
+		82A4D7902981B81400DB76D4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -428,6 +448,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8292F01E297F1D9D00CF9BEB /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		82A4D7912981B81400DB76D4 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 82A4D7902981B81400DB76D4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
