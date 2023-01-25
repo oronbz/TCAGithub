@@ -64,6 +64,8 @@ struct ProfileView: View {
                     image
                         .resizable()
                         .scaledToFit()
+                        .clipShape(Circle())
+                        .padding(40)
                 } placeholder: {
                     ProgressView()
                 }
