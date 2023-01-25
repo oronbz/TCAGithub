@@ -14,7 +14,7 @@ struct Profile: ReducerProtocol {
     struct State: Equatable, Identifiable {
         var searchItem: SearchResponse.Item
         var user: UserResponse?
-        var isCommentsPresened = false
+        var isCommentsPresented = false
         
         var id: Int {
             searchItem.id
@@ -44,10 +44,10 @@ struct Profile: ReducerProtocol {
                 print(error)
                 return .none
             case .showCommentsTapped:
-                state.isCommentsPresened = true
+                state.isCommentsPresented = true
                 return .none
             case .setComments(let isPresented):
-                state.isCommentsPresened = isPresented
+                state.isCommentsPresented = isPresented
                 return .none
             }
         }
@@ -97,7 +97,7 @@ struct ProfileView: View {
                 .padding()
             }
             .sheet(isPresented: viewStore.binding(
-                get: \.isCommentsPresened,
+                get: \.isCommentsPresented,
                 send: Profile.Action.setComments)
             ) {
                 CommentsView()
