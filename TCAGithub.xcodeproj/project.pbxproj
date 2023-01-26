@@ -21,6 +21,7 @@
 		82A4D78F2981B64B00DB76D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82A4D78E2981B64B00DB76D4 /* GoogleService-Info.plist */; };
 		82A4D7922981B81400DB76D4 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 82A4D7912981B81400DB76D4 /* FirebaseDatabase */; };
 		82A4D7942981C06D00DB76D4 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A4D7932981C06D00DB76D4 /* Comment.swift */; };
+		82A4D7962981C20200DB76D4 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A4D7952981C20200DB76D4 /* CommentService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		82A4D78C298004B000DB76D4 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		82A4D78E2981B64B00DB76D4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		82A4D7932981C06D00DB76D4 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		82A4D7952981C20200DB76D4 /* CommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				8292F022297F247600CF9BEB /* APIClient.swift */,
+				82A4D7952981C20200DB76D4 /* CommentService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				8292F007297EC0F000CF9BEB /* SearchView.swift in Sources */,
 				8292F023297F247600CF9BEB /* APIClient.swift in Sources */,
 				8292F01A297F16A400CF9BEB /* Key.swift in Sources */,
+				82A4D7962981C20200DB76D4 /* CommentService.swift in Sources */,
 				82A4D78D298004B000DB76D4 /* UserResponse.swift in Sources */,
 				8292F01D297F1A6100CF9BEB /* SearchResponse.swift in Sources */,
 				8292F015297ED2FB00CF9BEB /* ProfileView.swift in Sources */,

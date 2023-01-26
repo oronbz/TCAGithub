@@ -15,6 +15,7 @@ struct Profile: ReducerProtocol {
         var searchItem: SearchResponse.Item
         var user: UserResponse?
         var isCommentsPresented = false
+        var comments: Comments.State?
         
         var id: Int {
             searchItem.id
@@ -26,6 +27,7 @@ struct Profile: ReducerProtocol {
         case userResponse(TaskResult<UserResponse>)
         case showCommentsTapped
         case setComments(isPresented: Bool)
+        case comments(action: Comments.Action)
     }
     
     var body: some ReducerProtocolOf<Self> {
@@ -45,11 +47,20 @@ struct Profile: ReducerProtocol {
                 return .none
             case .showCommentsTapped:
                 state.isCommentsPresented = true
+                state.comments = .init(username: state.searchItem.login)
                 return .none
             case .setComments(let isPresented):
                 state.isCommentsPresented = isPresented
                 return .none
+            case .comments(.closeTapped):
+                state.isCommentsPresented = false
+                return .none
+            case .comments(_):
+                return .none
             }
+        }
+        .ifLet(\.comments, action: /Action.comments) {
+            Comments()
         }
     }
 }
@@ -100,7 +111,11 @@ struct ProfileView: View {
                 get: \.isCommentsPresented,
                 send: Profile.Action.setComments)
             ) {
-                CommentsView()
+                IfLetStore(store.scope(
+                    state: \.comments,
+                    action: Profile.Action.comments)) { store in
+                        CommentsView(store: store)
+                    }
             }
             .onAppear {
                 viewStore.send(.onAppear)
