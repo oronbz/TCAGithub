@@ -41,7 +41,9 @@ struct Comments: ReducerProtocol {
                 state.comment = comment
                 return .none
             case .onSubmit:
-                commentService.add(state.username, state.comment)
+                let comment = state.comment.trimmingCharacters(in: .whitespaces)
+                guard !comment.isEmpty else { return .none }
+                commentService.add(state.username, comment)
                 state.comment = ""
                 return .none
             case .closeTapped:
