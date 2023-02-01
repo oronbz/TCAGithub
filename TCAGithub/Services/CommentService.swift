@@ -10,7 +10,7 @@ import Dependencies
 import FirebaseDatabase
 
 struct CommentService {
-    var add: (_ comment: String, _ username: String) -> Void
+    var add: (_ comment: String, _ username: String) async -> Void
     var comments: (_ username: String) -> AsyncStream<[Comment]>
 }
 

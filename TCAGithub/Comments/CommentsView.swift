@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct Comments: ReducerProtocol {
-    @Dependency(\.commentService) var commentService;
+    @Dependency(\.commentService) var commentService
     
     struct State: Equatable {
         var username: String
@@ -43,9 +43,10 @@ struct Comments: ReducerProtocol {
             case .onSubmit:
                 let comment = state.comment.trimmingCharacters(in: .whitespaces)
                 guard !comment.isEmpty else { return .none }
-                commentService.add(state.username, comment)
                 state.comment = ""
-                return .none
+                return .fireAndForget { [username = state.username] in
+                    await commentService.add(username, comment)
+                }
             case .closeTapped:
                 return .none
             }
