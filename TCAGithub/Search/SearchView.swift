@@ -8,54 +8,59 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct Search: ReducerProtocol {
+struct Search: Reducer {
     @Dependency(\.apiClient.search) var search
     @Dependency(\.continuousClock) var clock
     
     struct State: Equatable {
-        var query: String = ""
-        var items: IdentifiedArrayOf<Profile.State> = []
+        @BindingState var query: String = ""
+        var items: IdentifiedArrayOf<SearchResponse.Item> = []
+        
+        @PresentationState var profile: Profile.State?
     }
     
-    enum Action: Equatable {
-        case queryChanged(String)
+    enum Action: Equatable, BindableAction {
         case searchResponse(TaskResult<SearchResponse>)
-        case profile(id: Int, action: Profile.Action)
+        case itemTapped(SearchResponse.Item.ID)
+        case profile(PresentationAction<Profile.Action>)
+        case binding(BindingAction<State>)
     }
     
     enum CancelID {}
     
-    var body: some ReducerProtocolOf<Self> {
-        Reduce { state, action in
+    var body: some ReducerOf<Self> {
+        BindingReducer()
+        Reduce<State, Action> { state, action in
             switch action {
-            case .queryChanged(let query):
-                state.query = query
-                guard query != "" else {
+            case .binding(\.$query):
+                guard state.query != "" else {
                     state.items = []
                     return .cancel(id: CancelID.self)
                 }
-                return .task {
-                    try await withTaskCancellation(id: CancelID.self,
-                                                   cancelInFlight: true) {
-                        try await clock.sleep(for: .seconds(0.3))
-                        return await .searchResponse(
-                            TaskResult { try await search(query) }
-                        )
-                    }
+                return .task { [query = state.query] in
+                    try await clock.sleep(for: .seconds(0.3))
+                    return await .searchResponse(
+                        TaskResult { try await search(query) }
+                    )
                 }
+                .cancellable(id: CancelID.self, cancelInFlight: true)
             case .searchResponse(.success(let response)):
-                state.items = .init(uniqueElements: response.items
-                    .map { .init(searchItem: $0) }
-                )
+                state.items = .init(uniqueElements: response.items)
                 return .none
             case .searchResponse(.failure(let error)):
                 print(error)
                 return .none
-            case .profile(_, _):
+            case .itemTapped(let id):
+                guard let item = state.items[id: id] else { return .none }
+                state.profile = .init(searchItem: item)
+                return .none
+            case .profile(_):
+                return .none
+            case.binding(_):
                 return .none
             }
         }
-        .forEach(\.items, action: /Action.profile) {
+        .ifLet(\.$profile, action: /Action.profile) {
             Profile()
         }
     }
@@ -68,14 +73,16 @@ struct SearchView: View {
         NavigationView {
             WithViewStore(store, observe: { $0 }) { viewStore in
                 List {
-                    ForEachStore(store.scope(state: \.items,
-                                             action: Search.Action.profile)) { store in
-                        NavigationLink {
-                            ProfileView(store: store)
-                        } label: {
-                            WithViewStore(store, observe: { $0 }) { viewStore in
+                    ForEach(viewStore.items) { item in
+                        NavigationLinkStore(
+                            store.scope(state: \.$profile, action: Search.Action.profile),
+                            id: item.id) {
+                                viewStore.send(.itemTapped(item.id))
+                            } destination: { store in
+                                ProfileView(store: store)
+                            } label: {
                                 HStack {
-                                    AsyncImage(url: viewStore.searchItem.avatarUrl) { image in
+                                    AsyncImage(url: item.avatarUrl) { image in
                                         image
                                             .resizable()
                                             .scaledToFit()
@@ -84,18 +91,14 @@ struct SearchView: View {
                                     }
                                     .frame(width: 40, height: 40)
                                     .cornerRadius(20)
-                                    Text(viewStore.searchItem.login)
+                                    Text(item.login)
                                     Spacer()
                                 }
                             }
-                        }
                     }
                 }
                 .navigationTitle("Search")
-                .searchable(text: viewStore.binding(
-                    get: \.query,
-                    send: Search.Action.queryChanged)
-                )
+                .searchable(text: viewStore.binding(\.$query))
                 .autocorrectionDisabled()
             }
             .onAppear {

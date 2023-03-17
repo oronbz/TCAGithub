@@ -8,14 +8,14 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct Profile: ReducerProtocol {
+struct Profile: Reducer {
     @Dependency(\.apiClient.user) var user
     
     struct State: Equatable, Identifiable {
         var searchItem: SearchResponse.Item
         var user: UserResponse?
-        var isCommentsPresented = false
-        var comments: Comments.State?
+        
+        @PresentationState var comments: Comments.State?
         
         var id: Int {
             searchItem.id
@@ -26,11 +26,10 @@ struct Profile: ReducerProtocol {
         case onAppear
         case userResponse(TaskResult<UserResponse>)
         case showCommentsTapped
-        case setComments(isPresented: Bool)
-        case comments(action: Comments.Action)
+        case comments(PresentationAction<Comments.Action>)
     }
     
-    var body: some ReducerProtocolOf<Self> {
+    var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
             case .onAppear:
@@ -46,20 +45,13 @@ struct Profile: ReducerProtocol {
                 print(error)
                 return .none
             case .showCommentsTapped:
-                state.isCommentsPresented = true
                 state.comments = .init(username: state.searchItem.login)
-                return .none
-            case .setComments(let isPresented):
-                state.isCommentsPresented = isPresented
-                return .none
-            case .comments(.closeTapped):
-                state.isCommentsPresented = false
                 return .none
             case .comments(_):
                 return .none
             }
         }
-        .ifLet(\.comments, action: /Action.comments) {
+        .ifLet(\.$comments, action: /Action.comments) {
             Comments()
         }
     }
@@ -68,8 +60,13 @@ struct Profile: ReducerProtocol {
 struct ProfileView: View {
     let store: StoreOf<Profile>
     
+    struct ViewState: Equatable {
+        let searchItem: SearchResponse.Item
+        let user: UserResponse?
+    }
+    
     var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
+        WithViewStore(store, observe: { ViewState(searchItem: $0.searchItem, user: $0.user) }) { viewStore in
             VStack {
                 AsyncImage(url: viewStore.searchItem.avatarUrl) { image in
                     image
@@ -107,15 +104,8 @@ struct ProfileView: View {
                 .tint(.orange)
                 .padding()
             }
-            .sheet(isPresented: viewStore.binding(
-                get: \.isCommentsPresented,
-                send: Profile.Action.setComments)
-            ) {
-                IfLetStore(store.scope(
-                    state: \.comments,
-                    action: Profile.Action.comments)) { store in
-                        CommentsView(store: store)
-                    }
+            .sheet(store: store.scope(state: \.$comments, action: Profile.Action.comments)) { store in
+                CommentsView(store: store)
             }
             .onAppear {
                 viewStore.send(.onAppear)

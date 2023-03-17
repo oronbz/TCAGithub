@@ -8,25 +8,27 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct Comments: ReducerProtocol {
+struct Comments: Reducer {
     @Dependency(\.commentService) var commentService
+    @Dependency(\.dismiss) var dismiss
     
     struct State: Equatable {
         var username: String
         var comments: IdentifiedArrayOf<Comment> = []
-        var comment: String = ""
+        @BindingState var comment: String = ""
     }
     
-    enum Action: Equatable {
+    enum Action: Equatable, BindableAction {
         case task
         case commentsChanged([Comment])
-        case setComment(String)
         case onSubmit
         case closeTapped
+        case binding(BindingAction<State>)
     }
     
-    var body: some ReducerProtocolOf<Self> {
-        Reduce { state, action in
+    var body: some ReducerOf<Self> {
+        BindingReducer()
+        Reduce<State, Action> { state, action in
             switch action {
             case .task:
                 return .run { [username = state.username] send in
@@ -37,9 +39,6 @@ struct Comments: ReducerProtocol {
             case .commentsChanged(let comments):
                 state.comments = .init(uniqueElements: comments)
                 return .none
-            case .setComment(let comment):
-                state.comment = comment
-                return .none
             case .onSubmit:
                 let comment = state.comment.trimmingCharacters(in: .whitespaces)
                 guard !comment.isEmpty else { return .none }
@@ -48,6 +47,10 @@ struct Comments: ReducerProtocol {
                     await commentService.add(username, comment)
                 }
             case .closeTapped:
+                return .fireAndForget {
+                    await dismiss()
+                }
+            case .binding(_):
                 return .none
             }
         }
@@ -68,9 +71,7 @@ struct CommentsView: View {
                     }
                     .scrollDismissesKeyboard(.immediately)
                     
-                    TextField("Awesome comment...", text: viewStore.binding(
-                        get: \.comment,
-                        send: Comments.Action.setComment))
+                    TextField("Awesome comment...", text: viewStore.binding(\.$comment))
                         .onSubmit {
                             viewStore.send(.onSubmit)
                         }
