@@ -7,13 +7,15 @@
 
 import SwiftUI
 import FirebaseCore
-
 import FirebaseDatabase
+import XCTestDynamicOverlay
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        FirebaseApp.configure()
+        if !_XCTIsTesting {
+            FirebaseApp.configure()
+        }
         
         return true
     }
@@ -25,7 +27,9 @@ struct TCAGithubApp: App {
     
     var body: some Scene {
         WindowGroup {
-            SearchView(store: .init(initialState: .init(), reducer: Search()))
+            if !_XCTIsTesting {
+                SearchView(store: .init(initialState: .init(), reducer: Search()))
+            }
         }
     }
 }

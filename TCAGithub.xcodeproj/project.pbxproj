@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		820791DD29C491F8003C86F4 /* CommentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820791DC29C491F8003C86F4 /* CommentsTests.swift */; };
+		820791E029C492CC003C86F4 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 820791DF29C492CC003C86F4 /* FirebaseDatabase */; };
 		824027E029C47C4500EA02BA /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824027DF29C47C4500EA02BA /* Key.swift */; };
 		8292F005297EC0F000CF9BEB /* TCAGithubApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292F004297EC0F000CF9BEB /* TCAGithubApp.swift */; };
 		8292F007297EC0F000CF9BEB /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8292F006297EC0F000CF9BEB /* SearchView.swift */; };
@@ -24,7 +26,19 @@
 		82A4D7962981C20200DB76D4 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A4D7952981C20200DB76D4 /* CommentService.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		820791D529C49159003C86F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8292EFF9297EC0F000CF9BEB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8292F000297EC0F000CF9BEB;
+			remoteInfo = TCAGithub;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		820791D129C49159003C86F4 /* TCAGithubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TCAGithubTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		820791DC29C491F8003C86F4 /* CommentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTests.swift; sourceTree = "<group>"; };
 		824027DF29C47C4500EA02BA /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		8292F001297EC0F000CF9BEB /* TCAGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCAGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8292F004297EC0F000CF9BEB /* TCAGithubApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCAGithubApp.swift; sourceTree = "<group>"; };
@@ -42,6 +56,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		820791CE29C49159003C86F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				820791E029C492CC003C86F4 /* FirebaseDatabase in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8292EFFE297EC0F000CF9BEB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -54,11 +76,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		820791D229C49159003C86F4 /* TCAGithubTests */ = {
+			isa = PBXGroup;
+			children = (
+				820791DC29C491F8003C86F4 /* CommentsTests.swift */,
+			);
+			path = TCAGithubTests;
+			sourceTree = "<group>";
+		};
+		820791DE29C492CC003C86F4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8292EFF8297EC0F000CF9BEB = {
 			isa = PBXGroup;
 			children = (
 				8292F003297EC0F000CF9BEB /* TCAGithub */,
+				820791D229C49159003C86F4 /* TCAGithubTests */,
 				8292F002297EC0F000CF9BEB /* Products */,
+				820791DE29C492CC003C86F4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				8292F001297EC0F000CF9BEB /* TCAGithub.app */,
+				820791D129C49159003C86F4 /* TCAGithubTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,6 +181,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		820791D029C49159003C86F4 /* TCAGithubTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 820791D729C49159003C86F4 /* Build configuration list for PBXNativeTarget "TCAGithubTests" */;
+			buildPhases = (
+				820791CD29C49159003C86F4 /* Sources */,
+				820791CE29C49159003C86F4 /* Frameworks */,
+				820791CF29C49159003C86F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				820791D629C49159003C86F4 /* PBXTargetDependency */,
+			);
+			name = TCAGithubTests;
+			packageProductDependencies = (
+				820791DF29C492CC003C86F4 /* FirebaseDatabase */,
+			);
+			productName = TCAGithubTests;
+			productReference = 820791D129C49159003C86F4 /* TCAGithubTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		8292F000297EC0F000CF9BEB /* TCAGithub */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8292F00F297EC0F100CF9BEB /* Build configuration list for PBXNativeTarget "TCAGithub" */;
@@ -172,6 +233,11 @@
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					820791D029C49159003C86F4 = {
+						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
+						TestTargetID = 8292F000297EC0F000CF9BEB;
+					};
 					8292F000297EC0F000CF9BEB = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -195,11 +261,19 @@
 			projectRoot = "";
 			targets = (
 				8292F000297EC0F000CF9BEB /* TCAGithub */,
+				820791D029C49159003C86F4 /* TCAGithubTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		820791CF29C49159003C86F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8292EFFF297EC0F000CF9BEB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -213,6 +287,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		820791CD29C49159003C86F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				820791DD29C491F8003C86F4 /* CommentsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8292EFFD297EC0F000CF9BEB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -232,7 +314,70 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		820791D629C49159003C86F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8292F000297EC0F000CF9BEB /* TCAGithub */;
+			targetProxy = 820791D529C49159003C86F4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		820791D829C49159003C86F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8JNH7ZGAY6;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gett.TCAGithubTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TCAGithub.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TCAGithub";
+			};
+			name = Debug;
+		};
+		820791D929C49159003C86F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8JNH7ZGAY6;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gett.TCAGithubTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TCAGithub.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TCAGithub";
+			};
+			name = Release;
+		};
 		8292F00D297EC0F100CF9BEB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -408,6 +553,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		820791D729C49159003C86F4 /* Build configuration list for PBXNativeTarget "TCAGithubTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				820791D829C49159003C86F4 /* Debug */,
+				820791D929C49159003C86F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8292EFFC297EC0F000CF9BEB /* Build configuration list for PBXProject "TCAGithub" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -448,6 +602,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		820791DF29C492CC003C86F4 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 82A4D7902981B81400DB76D4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
 		8292F01F297F1D9D00CF9BEB /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8292F01E297F1D9D00CF9BEB /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
